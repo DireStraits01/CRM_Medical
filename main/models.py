@@ -14,8 +14,7 @@ class Doctor(models.Model):
 
 class Patient(models.Model):
     name = models.CharField(max_length=50)
-    treatment_doctor = models.ForeignKey(
-        Doctor, related_name='treatment_doctor', on_delete=models.CASCADE)
+
     phone = models.CharField(max_length=12, null=True, blank=True)
     email = models.CharField(max_length=20, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -26,12 +25,13 @@ class Patient(models.Model):
 
 class Service(models.Model):
     patient = models.ForeignKey(
-        Patient, related_name='patient', on_delete=models.CASCADE)
-
+        Patient, related_name='patient', null=True, on_delete=models.SET_NULL)
+    attending_doctor = models.ForeignKey(
+        Doctor, related_name='attending_doctor', null=True, on_delete=models.SET_NULL)
     treatment = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     price = models.CharField(max_length=30)
     date_of_treatment = models.DateTimeField()
 
     def __str__(self):
-        return self.treatment, self.price, self.patient
+        return '%s %s %s' % (self.treatment, self.price, self.attending_doctor)
