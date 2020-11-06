@@ -3,8 +3,8 @@
 <br />
 
 <div class="row">
-    <div class="col-md-5">
-        <h5>LAST 5 Service</h5>
+    <div class="col-md-9">
+        <h5>Reception today:</h5>
         <hr />
         <div class="card card-body">
             <a class="btn btn-primary btn-sm btn-block" href="">Create Order</a>
@@ -14,6 +14,17 @@
                     <th>Doctor</th>
                     <th>Service type</th>
                     <th>Price</th>
+                </tr>
+                <tr>
+                    {% for check in service_check %}
+
+                    <td>{{check.date_of_treatment}}</td>
+                    <td>{{check.attending_doctor}}</td>
+                    <td>{{check.patient}}</td>
+                    <td>{{check.treatment}}</td>
+                    <td>{{check.price}}</td>
+
+                    {% endfor %}
                 </tr>
             </table>
         </div>

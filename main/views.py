@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from .models import*
+import datetime
 
 
 def home(request):
-
-    return render(request, 'main/dashboard.html')
+    today = datetime.date.today()
+    tomorrow = today + datetime.timedelta(days=1)
+    service_check = Service.objects.filter(
+        date_of_treatment__gte=today, date_of_treatment__lt=tomorrow)
+    return render(request, 'main/dashboard.html', {'service_check': service_check})
 
 
 def doctor(request):
