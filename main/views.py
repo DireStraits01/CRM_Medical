@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from .models import*
 
 
 def home(request):
+
     return render(request, 'main/dashboard.html')
 
 
@@ -14,4 +16,5 @@ def patient(request):
 
 
 def service(request):
-    return render(request, 'main/service.html')
+    service = Service.objects.all
+    return render(request, 'main/service.html', {'service': service})
