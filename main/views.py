@@ -18,3 +18,8 @@ def patient(request):
 def service(request):
     service = Service.objects.all
     return render(request, 'main/service.html', {'service': service})
+
+
+def appointment(request):
+
+    return render(request, 'main/appointment.html')
