@@ -8,7 +8,11 @@ def home(request):
     tomorrow = today + datetime.timedelta(days=1)
     service_check = Service.objects.filter(
         date_of_treatment__gte=today, date_of_treatment__lt=tomorrow)
-    return render(request, 'main/dashboard.html', {'service_check': service_check})
+    total_service_today = service_check.count()
+    total_service_today = service_check.price()
+    context = {'service_check': service_check,
+               'total_service_today': total_service_today}
+    return render(request, 'main/dashboard.html', context)
 
 
 def doctor(request):

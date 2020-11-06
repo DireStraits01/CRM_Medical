@@ -30,7 +30,7 @@ class Service(models.Model):
         Doctor, related_name='attending_doctor', null=True, on_delete=models.SET_NULL)
     treatment = models.CharField(max_length=100)
     description = models.TextField(blank=True)
-    price = models.CharField(max_length=30)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     date_of_treatment = models.DateTimeField()
 
     def __str__(self):
