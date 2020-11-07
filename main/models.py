@@ -3,7 +3,7 @@ from django.db import models
 
 class Doctor(models.Model):
     name = models.CharField(max_length=50)
-    specialization = models.CharField(max_length=50)
+    specialization = models.CharField(max_length=50, null=True, blank=True)
     phone = models.CharField(max_length=12, null=True, blank=True)
     email = models.CharField(max_length=20, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -23,12 +23,20 @@ class Patient(models.Model):
         return self.name
 
 
+class Treatment(models.Model):
+    type_of_treatment = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.type_of_treatment
+
+
 class Service(models.Model):
     patient = models.ForeignKey(
         Patient, related_name='patient', null=True, on_delete=models.SET_NULL)
     attending_doctor = models.ForeignKey(
         Doctor, related_name='attending_doctor', null=True, on_delete=models.SET_NULL)
-    treatment = models.CharField(max_length=100)
+    treatment = models.ForeignKey(
+        Treatment, related_name="treatment", null=True, on_delete=models.SET_NULL)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     date_of_treatment = models.DateTimeField()
