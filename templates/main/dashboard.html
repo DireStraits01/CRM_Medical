@@ -23,12 +23,13 @@
                     <td>{{check.patient}}</td>
                     <td>{{check.treatment}}</td>
                     <td>{{check.price}}</td>
-
-                    {% endfor %}
                 </tr>
+
+                {% endfor %}
             </table>
             <td>
-                <h3>{{ total_service_today}}</h3>
+                <strong>amount for today:</strong>
+                <h3>{{total_price_today}}</h3>
             </td>
         </div>
     </div>

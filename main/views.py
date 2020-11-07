@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import*
+from django.db.models import Sum
 import datetime
 
 
@@ -9,9 +10,10 @@ def home(request):
     service_check = Service.objects.filter(
         date_of_treatment__gte=today, date_of_treatment__lt=tomorrow)
     total_service_today = service_check.count()
-    total_service_today = service_check.price()
+    total_price = service_check.aggregate(Sum('price'))
+    total_price_today = float(total_price['price__sum'])
     context = {'service_check': service_check,
-               'total_service_today': total_service_today}
+               'total_price_today': total_price_today}
     return render(request, 'main/dashboard.html', context)
 
 
