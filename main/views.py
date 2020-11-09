@@ -56,10 +56,12 @@ def appointment(request):
 
 
 def create_appointment(request):
-    form = AppointmentForm(request.POST)
-    if form.is_valid():
-        form.save()
-        return redirect('/appointment')
+    form = AppointmentForm()
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/appointment')
     context = {'form': form}
     return render(request, 'main/f_appointment.html', context)
 
@@ -67,5 +69,11 @@ def create_appointment(request):
 def updateAppointment(request, pk):
     appointment = Appointment.objects.get(id=pk)
     form = AppointmentForm(instance=appointment)
+
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST, instance=appointment)
+        if form.is_valid():
+            form.save()
+            return redirect('/appointment')
     context = {'form': form}
     return render(request, 'main/f_appointment.html',  context)
