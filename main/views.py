@@ -37,7 +37,9 @@ def staff(request):
 
 
 def patient(request):
-    return render(request, 'main/patient.html')
+    patients = Patient.objects.all()
+    context = {'patients': patients}
+    return render(request, 'main/patients.html', context)
 
 
 def service(request):
