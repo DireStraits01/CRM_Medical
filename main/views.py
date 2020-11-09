@@ -77,3 +77,12 @@ def updateAppointment(request, pk):
             return redirect('/appointment')
     context = {'form': form}
     return render(request, 'main/f_appointment.html',  context)
+
+
+def deleteAppointment(request, pk):
+    appointment = Appointment.objects.get(id=pk)
+    if request.method == "POST":
+        appointment.delete()
+        return redirect('/appointment')
+    context = {'point': appointment}
+    return render(request, 'main/delete_appointment.html', context)

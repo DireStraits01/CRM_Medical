@@ -1,8 +1,9 @@
 {% extends "main/base.html" %} {% block content%}
-<p>удалить {{item}}?</p>
+<p>Вы уверены, что хотите удалить {{point}}?</p>
 
-<form method="POST">
+<form action="{% url 'deleteAppointment' point.id %}" method="POST">
+    {% csrf_token %}
     <a href="{% url 'appointment' %}">Отмена</a>
-    <inpute type="submit" name="Confirm">
+    <input type="Submit" name="Confirm" />
 </form>
 {% endblock %}
