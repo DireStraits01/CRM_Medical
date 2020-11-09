@@ -59,11 +59,11 @@ def create_appointment(request):
     form = AppointmentForm(request.POST)
     if form.is_valid():
         form.save()
-        return redirect('/')
+        return redirect('/appointment')
 
     return render(request, 'main/f_appointment.html', {'form': form})
 
 
-def appoint_update(request, pk):
+def updateAppointment(request, pk):
     form = AppointmentForm()
     return render(request, 'main/f_appointment.html', {'form': form})

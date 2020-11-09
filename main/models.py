@@ -16,7 +16,8 @@ class Patient(models.Model):
     name = models.CharField(max_length=50)
     phone = models.CharField(max_length=12, null=True, blank=True)
     email = models.CharField(max_length=20, null=True, blank=True)
-    date_created = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(
+        auto_now_add=True)
 
     def __str__(self):
         return self.name
