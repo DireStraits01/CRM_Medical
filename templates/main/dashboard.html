@@ -4,31 +4,46 @@
 
 <div class="row">
     <div class="col-md-9">
-        <h5>Reception today:</h5>
+        <h5>Прием на сегодня:</h5>
         <hr />
         <div class="card card-body">
-            <a class="btn btn-primary btn-sm btn-block" href="">Create Order</a>
+            <a class="btn btn-primary btn-sm btn-block" href=""
+                >добавить запись</a
+            >
             <table class="table table-sm">
                 <tr>
-                    <th>Serive time</th>
-                    <th>Doctor</th>
-                    <th>Service type</th>
-                    <th>Price</th>
+                    <th>дата и время</th>
+                    <th>доктор</th>
+                    <th>вид услуги</th>
+                    <th>пациент</th>
+                    <th>стоимость</th>
+                    <th>изменить</th>
+                    <th>удалить</th>
                 </tr>
                 <tr>
                     {% for check in service_check %}
 
                     <td>{{check.date_of_treatment}}</td>
                     <td>{{check.attending_doctor}}</td>
-                    <td>{{check.patient}}</td>
                     <td>{{check.treatment}}</td>
+                    <td>{{check.patient}}</td>
                     <td>{{check.price}}</td>
+                    <td>
+                        <a
+                            class="btn btn-sm btn-info"
+                            href="{% url 'update_home' check.id %}"
+                            >изменить</a
+                        >
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-danger" href="#">удалить</a>
+                    </td>
                 </tr>
 
                 {% endfor %}
             </table>
             <td>
-                <strong>amount for today:</strong>
+                <strong>Итого за день:</strong>
                 <h3>{{total_price_today}}</h3>
             </td>
         </div>

@@ -1,0 +1,9 @@
+{% extends "main/base.html" %} {% block content%}
+<p>Вы уверены, что хотите удалить {{check}}?</p>
+
+<form action="{% url 'delete_service' check.id %}" method="POST">
+    {% csrf_token %}
+    <a href="{% url 'home' %}">Отмена</a>
+    <input type="Submit" name="Confirm" />
+</form>
+{% endblock %}

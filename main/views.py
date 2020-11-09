@@ -3,7 +3,7 @@ from .models import*
 from django.db.models import Sum
 import datetime
 from django.db.models.functions import Coalesce
-from .forms import AppointmentForm
+from .forms import AppointmentForm, ServiceForm
 
 
 def home(request):
@@ -88,3 +88,32 @@ def deleteAppointment(request, pk):
         return redirect('/appointment')
     context = {'point': appointment}
     return render(request, 'main/delete_appointment.html', context)
+
+
+def delete_home(request, pk):
+    today = datetime.date.today()
+    tomorrow = today + datetime.timedelta(days=1)
+    delete_home_check = Service.objects.filter(
+        date_of_treatment__gte=today, date_of_treatment__lt=tomorrow)
+    delete_home = delete_home_check.objects.get(id=pk)
+    if request.method == "POST":
+        appointmentdelete_home.delete()
+        return redirect('/')
+    context = {'works': delete_home}
+    return render(request, 'main/dashboard.html', context)
+
+
+def update_home(request, pk):
+    today = datetime.date.today()
+    tomorrow = today + datetime.timedelta(days=1)
+    service_check = Service.objects.filter(
+        date_of_treatment__gte=today, date_of_treatment__lt=tomorrow)
+    service_home = service_check.get(id=pk)
+    form = ServiceForm(instance=service_home)
+    if request.method == 'POST':
+        form = ServiceForm(request.POST, instance=service_home)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'form': form}
+    return request(render, 'main/dashboard.html', context)
