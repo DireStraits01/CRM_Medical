@@ -20,11 +20,20 @@ def home(request):
     return render(request, 'main/dashboard.html', context)
 
 
-def doctor(request, pk):
+def doctor(request, pk=0):
     doctor = Doctor.objects.get(id=pk)
     services = doctor.attending_doctor.all()
-    context = {'doctor': doctor, 'services': services}
-    return render(request, 'main/doctor.html', context)
+    count_service = services.count()
+    # staff = Doctor.objects.all()
+    context = {'doctor': doctor,
+               'count_service': count_service, }
+    return render(request, 'main/doctor_detail.html', context)
+
+
+def staff(request):
+    staff = Doctor.objects.all()
+    context = {'staff': staff}
+    return render(request, 'main/staff.html', context)
 
 
 def patient(request):
@@ -33,11 +42,8 @@ def patient(request):
 
 def service(request):
     service = Service.objects.all
-
-    # # total_servie = service.aggregate(sum=(Coalesce(Sum('price'), 0)))
-    # # totalPriceService = total_servie['sum']
-    # context = {'service': service, 'totalPriceService': totalPriceService, }
-    return render(request, 'main/service.html',)
+    context = {'service': service}
+    return render(request, 'main/service.html', context)
 
 
 def appointment(request):
