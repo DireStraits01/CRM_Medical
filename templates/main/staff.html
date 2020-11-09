@@ -3,20 +3,19 @@
 <br />
 
 <div class="col-md-10">
-    <h5>STAFF</h5>
+    <h5>Персонал:</h5>
     <hr />
     <div class="card card-body">
         <a
             class="btn btn-primary btn-sm btn-block"
             href="{% url 'create_appointment' %}"
-            >Create employee</a
+            >добавить сотрудника</a
         >
         <table class="table table-sm">
             <tr>
-                <th>views</th>
-                <th>name</th>
-                <th>profile</th>
-                <th>phone</th>
+                <th>карточка</th>
+                <th>ф.и.о.</th>
+                <th>профиль</th>
             </tr>
             <tr>
                 {% for employee in staff %}
@@ -24,12 +23,11 @@
                     <a
                         class="btn btn-sm btn-success"
                         href="{% url 'doctor_detail' employee.id %}"
-                        >views</a
+                        >открыть</a
                     >
                 </td>
                 <td>{{employee.name}}</td>
                 <td>{{employee.specialization}}</td>
-                <td>{{employee.phone}}</td>
             </tr>
             {% endfor %}
         </table>

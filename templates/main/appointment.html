@@ -3,22 +3,22 @@
 <br />
 
 <div class="col-md-10">
-    <h5>Reception for the next 14 days:</h5>
+    <h5>Запись на ближайшие 14 дней:</h5>
     <hr />
     <div class="card card-body">
         <a
             class="btn btn-primary btn-sm btn-block"
             href="{% url 'create_appointment' %}"
-            >Create appointment</a
+            >записать на прием</a
         >
         <table class="table table-sm">
             <tr>
-                <th>Time appointment</th>
-                <th>Patient</th>
-                <th>Doctor</th>
-                <th>Complaint</th>
-                <th>update</th>
-                <th>delete</th>
+                <th>время приема</th>
+                <th>пациент</th>
+                <th>доктор</th>
+                <th>услуга</th>
+                <th>изменить</th>
+                <th>удалить</th>
             </tr>
             <tr>
                 {% for point in last_week_appointment %}
@@ -31,14 +31,14 @@
                     <a
                         class="btn btn-sm btn-info"
                         href="{% url 'updateAppointment' point.id %}"
-                        >update</a
+                        >изменить</a
                     >
                 </td>
                 <td>
                     <a
                         class="btn btn-sm btn-danger"
                         href="{% url 'deleteAppointment' point.id %}"
-                        >delete</a
+                        >удалить</a
                     >
                 </td>
             </tr>
