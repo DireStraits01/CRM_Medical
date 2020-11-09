@@ -60,10 +60,12 @@ def create_appointment(request):
     if form.is_valid():
         form.save()
         return redirect('/appointment')
-
-    return render(request, 'main/f_appointment.html', {'form': form})
+    context = {'form': form}
+    return render(request, 'main/f_appointment.html', context)
 
 
 def updateAppointment(request, pk):
-    form = AppointmentForm()
-    return render(request, 'main/f_appointment.html', {'form': form})
+    appointment = Appointment.objects.get(id=pk)
+    form = AppointmentForm(instance=appointment)
+    context = {'form': form}
+    return render(request, 'main/f_appointment.html',  context)
