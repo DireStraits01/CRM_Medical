@@ -1,0 +1,8 @@
+{% extends "main/base.html" %} {% block content%}
+<p>удалить {{item}}?</p>
+
+<form method="POST">
+    <a href="{% url 'appointment' %}">Отмена</a>
+    <inpute type="submit" name="Confirm">
+</form>
+{% endblock %}
