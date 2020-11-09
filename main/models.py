@@ -14,7 +14,7 @@ class Doctor(models.Model):
 
 class Patient(models.Model):
     name = models.CharField(max_length=50)
-
+    doctor = models.ForeignKey(Doctor, null=True, on_delete=models.SET_NULL)
     phone = models.CharField(max_length=12, null=True, blank=True)
     email = models.CharField(max_length=20, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -43,3 +43,15 @@ class Service(models.Model):
 
     def __str__(self):
         return '%s %s %s' % (self.treatment, self.price, self.attending_doctor)
+
+
+class Appointment(models.Model):
+    time_appointment = models.DateTimeField()
+    patient = models.ForeignKey(
+        Patient, related_name='patient_to_appointment', null=True, on_delete=models.SET_NULL)
+    doctor = models.ForeignKey(
+        Doctor, related_name='doctor_appointment', null=True, on_delete=models.SET_NULL)
+    complaint = models.CharField(max_length=50, null=True, blank=True)
+
+    def __str__(self):
+        return '%s %s' % (self.time_appointment, self.doctor)

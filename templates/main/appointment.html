@@ -3,23 +3,35 @@
 <br />
 
 <div class="col-md-10">
-    <h5>Patient:</h5>
+    <h5>Reception for the next 14 days:</h5>
     <hr />
     <div class="card card-body">
-        <a class="btn btn-primary btn-sm btn-block" href="#"
+        <a
+            class="btn btn-primary btn-sm btn-block"
+            href="{% url 'create_appointment' %}"
             >Create appointment</a
         >
         <table class="table table-sm">
             <tr>
-                <th>Appointment</th>
-                <th>Patient</th>
-                <th>Patient phone</th>
                 <th>Time appointment</th>
+                <th>Patient</th>
                 <th>Doctor</th>
                 <th>Complaint</th>
-                <th><a class="update" href="#">update</a></th>
-                <th><a class="remove" href="#">remove</a></th>
+                <th>update</th>
+                <th>delete</th>
             </tr>
+            <tr>
+                {% for point in last_week_appointment %}
+                <td>{{point.time_appointment}}</td>
+                <td>{{point.patient}}</td>
+                <td>{{point.doctor}}</td>
+                <td>{{point.complaint}}</td>
+                <td>
+                    <a class="btn btn-sm btn-info" href="#">update</a>
+                </td>
+                <td><a class="btn btn-sm btn-danger" href="#">delete</a></td>
+            </tr>
+            {% endfor %}
         </table>
     </div>
 </div>
