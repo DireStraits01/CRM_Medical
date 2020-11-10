@@ -91,16 +91,12 @@ def deleteAppointment(request, pk):
 
 
 def delete_home(request, pk):
-    today = datetime.date.today()
-    tomorrow = today + datetime.timedelta(days=1)
-    delete_home_check = Service.objects.filter(
-        date_of_treatment__gte=today, date_of_treatment__lt=tomorrow)
-    delete_home = delete_home_check.objects.get(id=pk)
+    delete_home = Service.objects.get(id=pk)
     if request.method == "POST":
-        appointmentdelete_home.delete()
+        delete_home.delete()
         return redirect('/')
-    context = {'works': delete_home}
-    return render(request, 'main/dashboard.html', context)
+    context = {'check': delete_home}
+    return render(request, 'main/delete_home.html', context)
 
 
 def update_home(request, pk):
@@ -114,6 +110,17 @@ def update_home(request, pk):
         form = ServiceForm(request.POST, instance=service_home)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('main/bashboard.html')
     context = {'form': form}
     return request(render, 'main/dashboard.html', context)
+
+
+def create_service_home(request):
+    form = ServiceForm()
+    if request.method == 'POST':
+        form = ServiceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'form': form}
+    return render(request, 'main/f_home.html', context)

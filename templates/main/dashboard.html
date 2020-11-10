@@ -7,7 +7,9 @@
         <h5>Прием на сегодня:</h5>
         <hr />
         <div class="card card-body">
-            <a class="btn btn-primary btn-sm btn-block" href=""
+            <a
+                class="btn btn-primary btn-sm btn-block"
+                href="{% url 'create_service_home' %}"
                 >добавить запись</a
             >
             <table class="table table-sm">
@@ -36,7 +38,11 @@
                         >
                     </td>
                     <td>
-                        <a class="btn btn-sm btn-danger" href="#">удалить</a>
+                        <a
+                            class="btn btn-sm btn-danger"
+                            href="{% url 'delete_home' check.id %}"
+                            >удалить</a
+                        >
                     </td>
                 </tr>
 
