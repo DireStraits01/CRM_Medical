@@ -100,19 +100,15 @@ def delete_home(request, pk):
 
 
 def update_home(request, pk):
-    today = datetime.date.today()
-    tomorrow = today + datetime.timedelta(days=1)
-    service_check = Service.objects.filter(
-        date_of_treatment__gte=today, date_of_treatment__lt=tomorrow)
-    service_home = service_check.get(id=pk)
+    service_home = Service.objects.get(id=pk)
     form = ServiceForm(instance=service_home)
     if request.method == 'POST':
         form = ServiceForm(request.POST, instance=service_home)
         if form.is_valid():
             form.save()
-            return redirect('main/bashboard.html')
+            return redirect('/')
     context = {'form': form}
-    return request(render, 'main/dashboard.html', context)
+    return render(request, 'main/f_home.html', context)
 
 
 def create_service_home(request):
