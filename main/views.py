@@ -57,6 +57,7 @@ def appointment(request):
     return render(request, 'main/appointment.html', {'last_week_appointment': last_week_appointment})
 
 
+##### for create button to appoitment  page##############################
 def create_appointment(request):
     form = AppointmentForm()
     if request.method == 'POST':
@@ -89,6 +90,8 @@ def deleteAppointment(request, pk):
     context = {'point': appointment}
     return render(request, 'main/delete_appointment.html', context)
 
+##### for create button to home page##############################
+
 
 def delete_home(request, pk):
     delete_home = Service.objects.get(id=pk)
@@ -120,3 +123,6 @@ def create_service_home(request):
             return redirect('/')
     context = {'form': form}
     return render(request, 'main/f_home.html', context)
+
+
+##### for create button to staff page##############################
