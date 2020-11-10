@@ -37,7 +37,7 @@ class Service(models.Model):
         Doctor, related_name='attending_doctor', null=True, on_delete=models.SET_NULL)
     treatment = models.ForeignKey(
         Treatment, related_name="treatment", null=True, on_delete=models.SET_NULL)
-    description = models.TextField(blank=True, null=True, max_length=50)
+    description = models.TextField(blank=True, max_length=50)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     date_of_treatment = models.DateTimeField()
 

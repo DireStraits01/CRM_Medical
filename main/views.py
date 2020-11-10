@@ -125,4 +125,35 @@ def create_service_home(request):
     return render(request, 'main/f_home.html', context)
 
 
-##### for create button to staff page##############################
+##### for create button to service page##############################
+
+def create_service(request):
+    form = ServiceForm()
+    if request.method == 'POST':
+        form = ServiceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/service')
+    context = {'form': form}
+    return render(request, 'main/f_home.html', context)
+
+
+def update_service(request, pk):
+    service = Service.objects.get(id=pk)
+    form = ServiceForm(instance=service)
+    if request.method == 'POST':
+        form = ServiceForm(request.POST, instance=service)
+        if form.is_valid():
+            form.save()
+            return redirect('/service')
+    context = {'form': form}
+    return render(request, 'main/f_home.html', context)
+
+
+def delete_service(request, pk):
+    service = Service.objects.get(id=pk)
+    if request.method == "POST":
+        service.delete()
+        return redirect('/service')
+    context = {'works': service}
+    return render(request, 'main/delete_service.html', context)

@@ -15,8 +15,12 @@ urlpatterns = [
     path('deleteAppointment/<int:pk>/',
          views.deleteAppointment, name='deleteAppointment'),
     path('patients/', views.patient, name='patients'),
-    path('update_home/<int:pk>', views.update_home, name='update_home'),
-    path('delete_home/<int:pk>', views.delete_home, name='delete_home'),
+    path('update_home/<int:pk>/', views.update_home, name='update_home'),
+    path('delete_home/<int:pk>/', views.delete_home, name='delete_home'),
     path('create_service_home', views.create_service_home,
-         name='create_service_home')
+         name='create_service_home'),
+    path('create_service', views.create_service,
+         name='create_service'),
+    path('update_service/<int:pk>/', views.update_service, name='update_service'),
+    path('delete_service/<int:pk>/', views.delete_service, name='delete_service'),
 ]

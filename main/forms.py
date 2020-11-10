@@ -11,4 +11,4 @@ class AppointmentForm(ModelForm):
 class ServiceForm(ModelForm):
     class Meta:
         model = Service
-        fields = ('patient', 'attending_doctor', 'price', 'date_of_treatment')
+        fields = '__all__'

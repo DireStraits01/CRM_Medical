@@ -3,33 +3,57 @@
 <div class="row">
     <div class="col-md">
         <div class="card card-body">
-            <h5>Service</h5>
+            <h5>Статистика</h5>
         </div>
         <div class="card card-body">
-            <table class="table">
-                <tr>
-                    <th>Date</th>
-                    <th>Doctor</th>
-                    <th>Patient</th>
-                    <th>Service</th>
-                    <th>Price</th>
-                </tr>
-                <tr>
-                    {% for works in service %}
-                    <td>{{works.date_of_treatment}}</td>
-                    <td>{{works.attending_doctor}}</td>
-                    <td>{{works.patient}}</td>
-                    <td>{{works.treatment}}</td>
-                    <td>{{works.price}}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <td>
-                <strong>TOTAL:</strong>
-                <h3>{{totalPriceService}}</h3>
-            </td>
+            <div class="card card-body">
+                <a
+                    class="btn btn-primary btn-sm btn-block"
+                    href="{% url 'create_service' %}"
+                    >добавить запись</a
+                >
+
+                <table class="table">
+                    <tr>
+                        <th>дата</th>
+                        <th>доктор</th>
+                        <th>пациент</th>
+                        <th>услуга</th>
+                        <th>цена</th>
+                        <th>изменить</th>
+                        <th>удалить</th>
+                    </tr>
+                    <tr>
+                        {% for works in service %}
+                        <td>{{works.date_of_treatment}}</td>
+                        <td>{{works.attending_doctor}}</td>
+                        <td>{{works.patient}}</td>
+                        <td>{{works.treatment}}</td>
+                        <td>{{works.price}}</td>
+                        <td>
+                            <a
+                                class="btn btn-sm btn-info"
+                                href="{% url 'update_service' works.id %}"
+                                >изменить</a
+                            >
+                        </td>
+                        <td>
+                            <a
+                                class="btn btn-sm btn-danger"
+                                href="{% url 'delete_service' works.id %}"
+                                >удалить</a
+                            >
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <td>
+                    <strong>итого:</strong>
+                    <h3>{{totalPriceService}}</h3>
+                </td>
+            </div>
         </div>
     </div>
-</div>
 
-{% endblock %}
+    {% endblock %}
+</div>
