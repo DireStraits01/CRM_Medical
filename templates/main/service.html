@@ -12,45 +12,75 @@
                     href="{% url 'create_service' %}"
                     >добавить запись</a
                 >
-
-                <table class="table">
-                    <tr>
-                        <th>дата</th>
-                        <th>доктор</th>
-                        <th>пациент</th>
-                        <th>услуга</th>
-                        <th>цена</th>
-                        <th>изменить</th>
-                        <th>удалить</th>
-                    </tr>
-                    {{myFilter.form}}
-                    <tr>
-                        {% for works in service %}
-                        <td>{{works.date_of_treatment}}</td>
-                        <td>{{works.attending_doctor}}</td>
-                        <td>{{works.patient}}</td>
-                        <td>{{works.treatment}}</td>
-                        <td>{{works.price}}</td>
-                        <td>
-                            <a
-                                class="btn btn-sm btn-info"
-                                href="{% url 'update_service' works.id %}"
-                                >изменить</a
-                            >
-                        </td>
-                        <td>
-                            <a
-                                class="btn btn-sm btn-danger"
-                                href="{% url 'delete_service' works.id %}"
-                                >удалить</a
-                            >
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </table>
+                <hr />
+                <form method="POST">
+                    {% csrf_token %}
+                    <strong>
+                        <p>
+                            от :
+                            <input
+                                type="date"
+                                name="fromdate"
+                                class="form-control col-md-2"
+                                aria-label="Default"
+                                aria-describedby="inputGroup-sizing-large"
+                            />
+                        </p>
+                        <p>
+                            до :<input
+                                type="date"
+                                name="todate"
+                                class="form-control col-md-2"
+                                aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default"
+                            />
+                        </p>
+                        <p>
+                            <button type="submit" class="btn btn-success">
+                                применить
+                            </button>
+                        </p>
+                        <!-- <p><input type="submit" value="применить" /></p> -->
+                    </strong>
+                    <table class="table">
+                        <tr>
+                            <th>дата</th>
+                            <th>доктор</th>
+                            <th>пациент</th>
+                            <th>услуга</th>
+                            <th>цена</th>
+                            <th>изменить</th>
+                            <th>удалить</th>
+                        </tr>
+                        {{myFilter.form}}
+                        <tr>
+                            {% for works in service %}
+                            <td>{{works.date_of_treatment}}</td>
+                            <td>{{works.attending_doctor}}</td>
+                            <td>{{works.patient}}</td>
+                            <td>{{works.treatment}}</td>
+                            <td>{{works.price}}</td>
+                            <td>
+                                <a
+                                    class="btn btn-sm btn-info"
+                                    href="{% url 'update_service' works.id %}"
+                                    >изменить</a
+                                >
+                            </td>
+                            <td>
+                                <a
+                                    class="btn btn-sm btn-danger"
+                                    href="{% url 'delete_service' works.id %}"
+                                    >удалить</a
+                                >
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </form>
                 <td>
                     <strong>итого:</strong>
-                    <h3>{{totalPriceService}}</h3>
+                    <h3>{{total_price_service}}</h3>
                 </td>
             </div>
         </div>
