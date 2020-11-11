@@ -4,12 +4,12 @@
 <div class="row">
     <div class="col-md">
         <div class="card card-body">
-            <h5>Статистика</h5>
+            <strong> <h1>Статистика</h1></strong>
         </div>
         <div class="card card-body">
             <div class="card card-body">
                 <a
-                    class="btn btn-primary btn-sm btn-block"
+                    class="btn btn-dark btn-sm btn-block"
                     href="{% url 'create_service' %}"
                     >добавить запись</a
                 >
@@ -23,7 +23,7 @@
                             <input
                                 type="date"
                                 name="fromdate"
-                                class="form-control col-md-2"
+                                class="form-control col-md-10"
                                 aria-label="Default"
                                 aria-describedby="inputGroup-sizing-large"
                             />
@@ -32,7 +32,7 @@
                             до :<input
                                 type="date"
                                 name="todate"
-                                class="form-control col-md-2"
+                                class="form-control col-md-10"
                                 aria-label="Default"
                                 aria-describedby="inputGroup-sizing-default"
                             />

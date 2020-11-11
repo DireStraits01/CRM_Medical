@@ -3,9 +3,12 @@
 <br />
 
 <div class="col-md-10">
+    <strong><h1>Пациенты</h1></strong>
     <hr />
     <div class="card card-body">
-        <a class="btn btn-primary btn-sm btn-block" href="#"
+        <a
+            class="btn btn-dark btn-sm btn-block"
+            href="{% url 'create_patient' %}"
             >добавить пациента</a
         >
         <table class="table table-sm">
@@ -24,9 +27,19 @@
                 <td>{{patient.email}}</td>
                 <td>{{patient.created}}</td>
                 <td>
-                    <a class="btn btn-sm btn-info" href="#">изменить</a>
+                    <a
+                        class="btn btn-sm btn-info"
+                        href="{% url 'update_patient' patient.id %}"
+                        >изменить</a
+                    >
                 </td>
-                <td><a class="btn btn-sm btn-danger" href="#">удалить</a></td>
+                <td>
+                    <a
+                        class="btn btn-sm btn-danger"
+                        href="{% url 'delete_patient' patient.id%}"
+                        >удалить</a
+                    >
+                </td>
             </tr>
             {% endfor %}
         </table>

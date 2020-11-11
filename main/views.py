@@ -3,7 +3,7 @@ from .models import*
 from django.db.models import Sum
 import datetime
 from django.db.models.functions import Coalesce
-from .forms import AppointmentForm, ServiceForm, DoctorForm
+from .forms import *
 
 
 def home(request):
@@ -200,3 +200,36 @@ def delete_doctor(request, pk):
         return redirect('/staff')
     context = {'employee': doctor}
     return render(request, 'main/delete_doctor.html', context)
+############## buttons for patient.html page#########################
+
+
+def create_patient(request):
+    form = PatientForm()
+    if request.method == "POST":
+        form = PatientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/patient')
+    context = {'form': form}
+    return render(request, 'main/f_patient.html', context)
+
+
+def update_patient(request, pk):
+    patient = Patient.objects.get(id=pk)
+    form = PatientForm(instance=patient)
+    if request.method == 'POST':
+        form = PatientForm(request.POST, instance=patient)
+        if form.is_valid():
+            form.save()
+            return redirect('/patient')
+    context = {'form': form}
+    return render(request, 'main/f_patient.html', context)
+
+
+def delete_patient(request, pk):
+    patient = Patient.objects.get(id=pk)
+    if request.method == 'POST':
+        patient.delete()
+        return redirect('/patient')
+    context = {'patient': patient}
+    return render(request, 'main/delete_patient.html', context)
