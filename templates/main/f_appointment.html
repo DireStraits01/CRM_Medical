@@ -1,6 +1,8 @@
 {% extends "main/base.html" %} {% block content%}
 <table>
-    <form action="" method="POST">{% csrf_token %} {{form}}</form>
+    <form action="" method="POST">
+        {% csrf_token %} {{form}}
+        <input type="submit" name="submit" />
+    </form>
 </table>
-<input type="submit" name="submit" />
 {% endblock %}

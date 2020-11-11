@@ -4,7 +4,6 @@ from django.db.models import Sum
 import datetime
 from django.db.models.functions import Coalesce
 from .forms import AppointmentForm, ServiceForm, DoctorForm
-from .filters import ServiceFilter
 
 
 def home(request):
@@ -48,23 +47,24 @@ def service(request):
         fromdate = request.POST.get('fromdate')
         todate = request.POST.get('todate')
         searchresult = Service.objects.raw(
-            'select   id, date_of_treatment, price from service_db where date_of_treatment between "'+fromdate+'" and "'+todate + '"')
+            'select   id,  time_appointment from appointment_db where  time_appointment between "'+fromdate+'" and "'+todate + '"')
         context = {'service': searchresult}
         return render(request, 'main/service.html', context)
     else:
         service = Service.objects.all().order_by('date_of_treatment')
-        myFilter = ServiceFilter()
         context = {'service': service}
         return render(request, 'main/service.html', context)
 
 
 def appointment(request):
-    after_one_week = Appointment.objects.all()
-    today = datetime.date.today()
-    after_one_week = today + datetime.timedelta(days=15)
-    last_week_appointment = Appointment.objects.filter(
-        time_appointment__gte=today, time_appointment__lt=after_one_week).order_by('time_appointment')
-    return render(request, 'main/appointment.html', {'last_week_appointment': last_week_appointment})
+    appointment = Appointment.objects.all().order_by('time_appointment')
+    context = {'appointment': appointment}
+    return render(request,  'main/appointment.html', context)
+    # today = datetime.date.today()
+    # after_one_week = today + datetime.timedelta(days=15)
+    # last_week_appointment = Appointment.objects.filter(
+    #     time_appointment__gte=today, time_appointment__lt=after_one_week).order_by('time_appointment')
+    # return render(request, 'main/appointment.html', {'last_week_appointment': last_week_appointment})
 
 
 ##### for create button to appoitment  page##############################

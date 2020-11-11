@@ -3,7 +3,7 @@
 <br />
 
 <div class="col-md-10">
-    <h5>Расписание на ближайшие 14 дней:</h5>
+    <h5>Расписание по приему пациентов:</h5>
     <hr />
     <div class="card card-body">
         <a
@@ -21,7 +21,7 @@
                 <th>удалить</th>
             </tr>
             <tr>
-                {% for point in last_week_appointment %}
+                {% for point in appointment %}
                 <td>{{point.time_appointment}}</td>
                 <td>{{point.patient}}</td>
                 <td>{{point.doctor}}</td>
