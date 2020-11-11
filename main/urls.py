@@ -23,4 +23,7 @@ urlpatterns = [
          name='create_service'),
     path('update_service/<int:pk>/', views.update_service, name='update_service'),
     path('delete_service/<int:pk>/', views.delete_service, name='delete_service'),
+    path('create_doctor', views.create_doctor, name='create_doctor'),
+    path('update_doctor/<int:pk>/', views.update_doctor, name='update_doctor'),
+    path('delete_doctor/<int:pk>/', views.delete_doctor, name='delete_doctor'),
 ]

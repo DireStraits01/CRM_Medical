@@ -8,7 +8,7 @@
     <div class="card card-body">
         <a
             class="btn btn-primary btn-sm btn-block"
-            href="{% url 'create_appointment' %}"
+            href="{% url 'create_doctor' %}"
             >добавить сотрудника</a
         >
         <table class="table table-sm">
@@ -16,6 +16,7 @@
                 <th>карточка</th>
                 <th>ф.и.о.</th>
                 <th>профиль</th>
+                <th>удалить</th>
             </tr>
             <tr>
                 {% for employee in staff %}
@@ -28,6 +29,13 @@
                 </td>
                 <td>{{employee.name}}</td>
                 <td>{{employee.specialization}}</td>
+                <td>
+                    <a
+                        class="btn btn-sm btn-danger"
+                        href="{% url 'delete_doctor' employee.id %}"
+                        >удалить</a
+                    >
+                </td>
             </tr>
             {% endfor %}
         </table>

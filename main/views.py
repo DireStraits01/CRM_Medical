@@ -3,7 +3,8 @@ from .models import*
 from django.db.models import Sum
 import datetime
 from django.db.models.functions import Coalesce
-from .forms import AppointmentForm, ServiceForm
+from .forms import AppointmentForm, ServiceForm, DoctorForm
+from .filters import ServiceFilter
 
 
 def home(request):
@@ -43,17 +44,18 @@ def patient(request):
 
 
 def service(request):
-    service = Service.objects.all
+    service = Service.objects.all().order_by('date_of_treatment')
+    myFilter = ServiceFilter()
     context = {'service': service}
     return render(request, 'main/service.html', context)
 
 
 def appointment(request):
-    after_one_week = Appointment.objects.all
+    after_one_week = Appointment.objects.all()
     today = datetime.date.today()
     after_one_week = today + datetime.timedelta(days=15)
     last_week_appointment = Appointment.objects.filter(
-        time_appointment__gte=today, time_appointment__lt=after_one_week)
+        time_appointment__gte=today, time_appointment__lt=after_one_week).order_by('time_appointment')
     return render(request, 'main/appointment.html', {'last_week_appointment': last_week_appointment})
 
 
@@ -157,3 +159,36 @@ def delete_service(request, pk):
         return redirect('/service')
     context = {'works': service}
     return render(request, 'main/delete_service.html', context)
+############## buttons for staff.html page#########################
+
+
+def create_doctor(request):
+    form = DoctorForm()
+    if request.method == 'POST':
+        form = DoctorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/staff')
+    context = {'form': form}
+    return render(request, 'main/f_doctor.html', context)
+
+
+def update_doctor(request, pk):
+    doctor = Doctor.objects.get(id=pk)
+    form = DoctorForm(instance=doctor)
+    if request.method == 'POST':
+        form = DoctorForm(request.POST, instance=doctor)
+        if form.is_valid():
+            form.save()
+            return redirect('/staff')
+    context = {'form': form}
+    return render(request, 'main/f_doctor.html', context)
+
+
+def delete_doctor(request, pk):
+    doctor = Doctor.objects.get(id=pk)
+    if request.method == 'POST':
+        doctor.delete()
+        return redirect('/staff')
+    context = {'employee': doctor}
+    return render(request, 'main/delete_doctor.html', context)
