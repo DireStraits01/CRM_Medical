@@ -1,4 +1,5 @@
 {% extends "main/base.html" %} {% block content%}
+<title>{% block title %} Статистика {% endblock title %}</title>
 
 <br />
 <div class="row">
@@ -44,7 +45,12 @@
                         </p>
                         <!-- <p><input type="submit" value="применить" /></p> -->
                     </strong>
-
+                    <div class="content">
+                        <td>
+                            <strong>итого:</strong>
+                            <h3>{{total_price_service}}</h3>
+                        </td>
+                    </div>
                     <table class="table">
                         <tr>
                             <th>дата</th>
@@ -81,10 +87,6 @@
                         {% endfor %}
                     </table>
                 </form>
-                <td>
-                    <strong>итого:</strong>
-                    <h3>{{total_price_service}}</h3>
-                </td>
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>{% block title %} CRM-BASE {% endblock title %}</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
@@ -12,11 +13,11 @@
             crossorigin="anonymous"
         />
 
-        <link
+        <!-- <link
             rel="stylesheet"
             type="text/css"
             href="{% static 'css/main.css' %}"
-        />
+        /> -->
     </head>
     <body>
         {% include "main/navbar.html" %}

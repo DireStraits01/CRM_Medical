@@ -48,15 +48,23 @@ def service(request):
         todate = request.POST['todate']
         searchresult = Service.objects.filter(
             date_of_treatment__lte=todate, date_of_treatment__gte=fromdate).order_by('date_of_treatment')
+        total_price = searchresult.aggregate(
+            sum=(Coalesce(Sum('price'), 0)))
+        total_price_service = total_price['sum']
         # fromdate = request.POST.get('fromdate')
         # todate = request.POST.get('todate')
         # searchresult = Service.objects.raw(
         #     'select   id,  date_of_treatment, price from service_db where  date_of_treatment between "'+fromdate+'" and "'+todate + '"')
-        context = {'service': searchresult}
+        context = {'service': searchresult,
+                   'total_price_service': total_price_service}
         return render(request, 'main/service.html', context)
     else:
         service = Service.objects.all().order_by('date_of_treatment')
-        context = {'service': service}
+        total_price = service.aggregate(
+            sum=(Coalesce(Sum('price'), 0)))
+        total_price_service = total_price['sum']
+        context = {'service': service,
+                   'total_price_service': total_price_service}
         return render(request, 'main/service.html', context)
 
 
