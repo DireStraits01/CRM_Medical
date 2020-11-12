@@ -44,10 +44,14 @@ def patient(request):
 
 def service(request):
     if request.method == 'POST':
-        fromdate = request.POST.get('fromdate')
-        todate = request.POST.get('todate')
-        searchresult = Service.objects.raw(
-            'select   id,  time_appointment from appointment_db where  time_appointment between "'+fromdate+'" and "'+todate + '"')
+        fromdate = request.POST['fromdate']
+        todate = request.POST['todate']
+        searchresult = Service.objects.filter(
+            date_of_treatment__lte=todate, date_of_treatment__gte=fromdate).order_by('date_of_treatment')
+        # fromdate = request.POST.get('fromdate')
+        # todate = request.POST.get('todate')
+        # searchresult = Service.objects.raw(
+        #     'select   id,  date_of_treatment, price from service_db where  date_of_treatment between "'+fromdate+'" and "'+todate + '"')
         context = {'service': searchresult}
         return render(request, 'main/service.html', context)
     else:
