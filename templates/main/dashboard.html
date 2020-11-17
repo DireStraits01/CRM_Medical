@@ -1,0 +1,60 @@
+{% extends "main/base.html" %} {% block content%}
+<title>{% block title %} Главная {% endblock title %}</title>
+
+<br />
+
+<div class="row">
+    <div class="col-md-9">
+        <h5>за {% now "j N Y" %}:</h5>
+        <hr />
+        <div class="card card-body">
+            <a
+                class="btn btn-primary btn-sm btn-block"
+                href="{% url 'create_service_home' %}"
+                >добавить запись</a
+            >
+            <table class="table table-sm">
+                <tr>
+                    <th>дата и время</th>
+                    <th>доктор</th>
+                    <th>вид услуги</th>
+                    <th>пациент</th>
+                    <th>стоимость</th>
+                    <th>изменить</th>
+                    <th>удалить</th>
+                </tr>
+                <tr>
+                    {% for check in service_check %}
+
+                    <td>{{check.date_of_treatment}}</td>
+                    <td>{{check.attending_doctor}}</td>
+                    <td>{{check.treatment}}</td>
+                    <td>{{check.patient}}</td>
+                    <td>{{check.price}}</td>
+                    <td>
+                        <a
+                            class="btn btn-sm btn-info"
+                            href="{% url 'update_home' check.id %}"
+                            >изменить</a
+                        >
+                    </td>
+                    <td>
+                        <a
+                            class="btn btn-sm btn-danger"
+                            href="{% url 'delete_home' check.id %}"
+                            >удалить</a
+                        >
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </table>
+            <td>
+                <strong>Итого за день:</strong>
+                <h3>{{total_price_today}}</h3>
+            </td>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

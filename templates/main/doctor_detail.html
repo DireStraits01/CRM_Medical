@@ -1,0 +1,62 @@
+{% extends "main/base.html" %} {% block content%}
+
+<br />
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>сотрудник: {{doctor.name}}</h5>
+            <hr />
+
+            <td>
+                <a
+                    class="btn btn-outline-info btn-sm btn-block"
+                    href="{% url 'update_doctor' doctor.id %}"
+                    >изменить данные</a
+                >
+            </td>
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Контакты</h5>
+            <hr />
+            <p>эл. почта: {{doctor.email}}</p>
+            <p>телефон: {{doctor.phone}}</p>
+            <hr />
+            <h5>Информация</h5>
+            <p>профиль: {{doctor.specialization}}</p>
+            <p>дата создания профайла: {{doctor.date_created}}</p>
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Количество оказаных услуг:</h5>
+            <hr />
+            <h1 style="text-align: center; padding: 10px">{{count_service}}</h1>
+        </div>
+    </div>
+</div>
+
+<!-- <br />
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form method="get">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br />
+
+ <div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm"></table>
+        </div>
+    </div>
+</div> -->
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "main/base.html" %} {% block content%}
+<title>{% block title %} Доска {% endblock title %}</title>
+
+<br />
+
+<div class="col-md-10">
+   <strong></strong><h5>Расписание по приему пациентов:</h5></strong>
+    <hr />
+    <div class="card card-body">
+        <a
+            class="btn btn-primary btn-sm btn-block"
+            href="{% url 'create_appointment' %}"
+            >записать на прием</a
+        >
+        <table class="table table-sm">
+            <tr>
+                <th>время приема</th>
+                <th>пациент</th>
+                <th>доктор</th>
+                <th>услуга</th>
+                <th>изменить</th>
+                <th>удалить</th>
+            </tr>
+            <tr>
+                {% for point in appointment %}
+                <td>{{point.time_appointment}}</td>
+                <td>{{point.patient}}</td>
+                <td>{{point.doctor}}</td>
+                <td>{{point.complaint}}</td>
+
+                <td>
+                    <a
+                        class="btn btn-sm btn-info"
+                        href="{% url 'updateAppointment' point.id %}"
+                        >изменить</a
+                    >
+                </td>
+                <td>
+                    <a
+                        class="btn btn-sm btn-danger"
+                        href="{% url 'deleteAppointment' point.id %}"
+                        >удалить</a
+                    >
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

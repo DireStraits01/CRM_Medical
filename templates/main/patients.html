@@ -1,0 +1,49 @@
+{% extends "main/base.html" %} {% block content %}
+<title>{% block title %} Пациенты {% endblock title %}</title>
+<br />
+
+<div class="col-md-10">
+    <strong><h1>Пациенты</h1></strong>
+    <hr />
+    <div class="card card-body">
+        <a
+            class="btn btn-primary btn-sm btn-block"
+            href="{% url 'create_patient' %}"
+            >добавить пациента</a
+        >
+        <table class="table table-sm">
+            <tr>
+                <th>ф.и.о.</th>
+                <th>телефон</th>
+                <th>эл. почта</th>
+                <th>добавлен</th>
+                <th>изменить</th>
+                <th>удалить</th>
+            </tr>
+            <tr>
+                {% for patient in patients %}
+                <td>{{patient.name}}</td>
+                <td>{{patient.phone}}</td>
+                <td>{{patient.email}}</td>
+                <td>{{patient.created}}</td>
+                <td>
+                    <a
+                        class="btn btn-sm btn-info"
+                        href="{% url 'update_patient' patient.id %}"
+                        >изменить</a
+                    >
+                </td>
+                <td>
+                    <a
+                        class="btn btn-sm btn-danger"
+                        href="{% url 'delete_patient' patient.id%}"
+                        >удалить</a
+                    >
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
