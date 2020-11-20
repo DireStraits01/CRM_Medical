@@ -2,8 +2,24 @@ from django.shortcuts import render, redirect
 from .models import*
 from django.db.models import Sum
 import datetime
+from django.contrib.auth import authenticate, login, logout
 from django.db.models.functions import Coalesce
 from .forms import *
+
+
+def loginPage(request):
+
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('username')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, username)
+            return redirect('home')
+
+    context = {}
+    return render(request, 'main/login.html', context)
 
 
 def home(request):
