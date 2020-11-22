@@ -8,19 +8,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 
 
-# def loginPage(request):
-
-# if request.method == "POST":
-#   username = request.POST.get('username')
-#  password = request.POST.get('username')
-# user = authenticate(request, username=username, password=password)
-
-# if user is not None:
-#   login(request, username)
-#  return redirect('home')
-#context = {}
-# return render(request, 'registration/login.html', context)
-
 @login_required(login_url='login')
 def home(request):
     today = datetime.date.today()
@@ -71,10 +58,7 @@ def service(request):
         total_price = searchresult.aggregate(
             sum=(Coalesce(Sum('price'), 0)))
         total_price_service = total_price['sum']
-        # fromdate = request.POST.get('fromdate')
-        # todate = request.POST.get('todate')
-        # searchresult = Service.objects.raw(
-        #     'select   id,  date_of_treatment, price from service_db where  date_of_treatment between "'+fromdate+'" and "'+todate + '"')
+
         context = {'service': searchresult,
                    'total_price_service': total_price_service}
         return render(request, 'main/service.html', context)
@@ -93,11 +77,6 @@ def appointment(request):
     appointment = Appointment.objects.all().order_by('time_appointment')
     context = {'appointment': appointment}
     return render(request,  'main/appointment.html', context)
-    # today = datetime.date.today()
-    # after_one_week = today + datetime.timedelta(days=15)
-    # last_week_appointment = Appointment.objects.filter(
-    #     time_appointment__gte=today, time_appointment__lt=after_one_week).order_by('time_appointment')
-    # return render(request, 'main/appointment.html', {'last_week_appointment': last_week_appointment})
 
 
 ##### for create button to appoitment  page##############################
