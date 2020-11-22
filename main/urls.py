@@ -1,7 +1,8 @@
 from django.urls import path
 from . import views
-
+from django.contrib.auth import views as auth_views
 urlpatterns = [
+    path('admin/', views.home, name='admin'),
     path('', views.home, name='home'),
     path('doctor_detail/<int:pk>/', views.doctor, name='doctor_detail'),
     path('patient/', views.patient, name='patient'),
@@ -29,5 +30,15 @@ urlpatterns = [
     path('create_patient/', views.create_patient, name='create_patient'),
     path('update_patient/<int:pk>/', views.update_patient, name='update_patient'),
     path('delete_patient/<int:pk>/', views.delete_patient, name='delete_patient'),
-    #path('login/', views.loginPage, name="login")
+    path('reset_password/', auth_views.PasswordResetView.as_view(),
+         name='password_reset'),
+
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(),
+         name='password_reset_done'),
+
+    path('reset<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(),
+         name='password_reset_confirm'),
+
+    path('reset_password_complete/',
+         auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 ]

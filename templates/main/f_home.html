@@ -1,9 +1,15 @@
 {% extends "main/base.html" %} {% block content%}
 <table>
-    <form action="" method="POST">
-        {% csrf_token %} {{form}}
-        <input type="submit" name="submit" />
-    </form>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <p>{{form}}</p>
+    <!--   <p>{{form.attending_doctor}}</p>
+    <p>{{form.treatment}}</p>
+    <p>{{form.description}}</p>
+    <p>{{form.price}}</p>
+    <p>{{form.date_of_treatment}}</p>-->
+    <input type="submit" name="submit" />
+  </form>
 </table>
 
 {% endblock %}

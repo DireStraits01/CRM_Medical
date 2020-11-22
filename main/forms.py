@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, TextInput
 from .models import *
 
 
@@ -12,6 +12,12 @@ class ServiceForm(ModelForm):
     class Meta:
         model = Service
         fields = '__all__'
+
+        widgets = {
+            "date_of_treatment": TextInput(attrs={
+                "placeholder": "гггг-мм-дд чч:мм:сс"
+            })
+        }
 
 
 class DoctorForm(ModelForm):
