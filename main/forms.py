@@ -7,6 +7,10 @@ class AppointmentForm(ModelForm):
         model = Appointment
         fields = '__all__'
 
+        widgets = {
+            "time_appointment": TextInput(attrs={"placeholder": "гггг-мм-дд чч:мм:сс"})
+        }
+
 
 class ServiceForm(ModelForm):
     class Meta:
