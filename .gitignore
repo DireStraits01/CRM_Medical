@@ -1,1 +1,2 @@
-crmn/key.py
+.env
+db.sqlite3
