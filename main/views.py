@@ -20,7 +20,7 @@ def home(request):
     total_price_today = total_price['sum']
     context = {'service_check': service_check,
                'total_price_today': total_price_today}
-    return render(request, 'main/dashboard.html', context)
+    return render(request, 'main/index.html', context)
 
 
 @login_required(login_url='login')
