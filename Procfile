@@ -1,1 +1,1 @@
-gunicorn crmn.wsgi --log-file -
+web: gunicorn crmn.wsgi
