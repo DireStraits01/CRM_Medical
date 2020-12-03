@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('Debug')
 
-ALLOWED_HOSTS = ['crm-base.herokuapp.com']
+ALLOWED_HOSTS = ['crm-base.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
