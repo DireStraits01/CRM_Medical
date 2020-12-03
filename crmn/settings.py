@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['crm-emin.herokuapp.com']
+ALLOWED_HOSTS = ['crm-base.herokuapp.com']
 
 
 # Application definition
@@ -125,9 +125,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILE_DIRS = [
-      "static/images", 
-      "static/css", 
-      "staticfiles",]
+    "static/images",
+    "static/css",
+    "staticfiles", ]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
