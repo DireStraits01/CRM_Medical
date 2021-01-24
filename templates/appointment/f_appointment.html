@@ -1,4 +1,6 @@
 {% extends "main/base.html" %} {% load crispy_forms_tags %} {% block content%}
+<br />
+
 <div class="text-center mt-5">
   <form action="" method="POST" style="max-width: 480px; margin: auto">
     {% csrf_token %} {{form|crispy}}
