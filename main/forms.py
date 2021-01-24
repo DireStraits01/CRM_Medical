@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput
+from django.forms import ModelForm, TextInput, DateTimeInput
 from .models import *
 
 
@@ -8,7 +8,8 @@ class AppointmentForm(ModelForm):
         fields = '__all__'
 
         widgets = {
-            "time_appointment": TextInput(attrs={"placeholder": "гггг-мм-дд чч:мм:сс"})
+            "time_appointment": DateTimeInput(attrs={"placeholder": "гггг-мм-дд чч:мм:сс"}),
+
         }
 
 

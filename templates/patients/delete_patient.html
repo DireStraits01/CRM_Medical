@@ -1,0 +1,13 @@
+{% extends "main/base.html" %} {% block content %}
+
+<form action="{% url 'delete_patient' patient.id %}" method="POST" style="max-width: 480px; margin: auto">
+<h5> <strong> <p> Вы уверены, что хотите удалить {{patient}}?</p></h5></strong>
+
+  {% csrf_token %}
+  <a href="{% url 'patients' %} " class="btn btn-primary">отмена</a>
+  
+    <input type="Submit" class="btn btn-danger" value="удалить" />
+  
+</form>
+
+{% endblock %}

@@ -1,9 +1,0 @@
-{% extends "main/base.html" %} {% block content%}
-<p>Вы уверены, что хотите удалить {{employee}}?</p>
-
-<form action="{% url 'delete_doctor' employee.id %}" method="POST">
-    {% csrf_token %}
-    <a href="{% url 'staff'  %}">Отмена</a>
-    <input type="Submit" name="Confirm" />
-</form>
-{% endblock %}

@@ -1,0 +1,13 @@
+.log {
+  display: inline-block !important;
+  padding: 0 15px;
+  color: #fff;
+  background: #f56147;
+  border: none;
+  -webkit-appearance: none;
+
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase;
+  font: 500 15px/40px Metric, Consolas, Helvetica, Arial, sans-serif;
+}

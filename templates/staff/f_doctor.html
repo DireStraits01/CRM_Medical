@@ -1,0 +1,10 @@
+{% extends "main/base.html" %} {% load crispy_forms_tags %} {% block content %}
+
+<form action="" method="POST" style="max-width: 480px; margin: auto">
+  {% csrf_token %} {{form|crispy}}
+  <div class="d-grid gap-2 mt-4">
+    <input type="Submit" class="btn btn-primary" value="отправить" />
+  </div>
+</form>
+
+{% endblock %}

@@ -40,6 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
+    'staff.apps.StaffConfig',
+    'patients.apps.PatientsConfig',
+    'service.apps.ServiceConfig',
+    'appointment.apps.AppointmentConfig',
+    'crispy_forms',
     # 'django_filters',
 ]
 
@@ -92,15 +97,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    #  {
+    #      'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    #  },
+    #  {
+    #      'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    #  },
+    #  {
+    #      'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    #  },
 ]
 
 
@@ -122,14 +127,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATIC_URL = '/media/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main/static')]
+
+
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # email django
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
